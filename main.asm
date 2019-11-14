@@ -52,10 +52,14 @@ asm_main:
     mov     [input], eax    ; store into input
 
     mov     eax, [input]    ; eax = dword at input
-    idiv    N100            ; edx = eax / 100
-    imul    ecx, edx, N100  ; ecx = edx * 100
-    mov     eax, ecx        ; move ecx to eax
-    sub     ebx, ecx        ; eax = eax - ecx
+	mov		ecx, N100
+    idiv    ecx            	; edx = eax / ecx
+    imul    ecx, edx, N100  ; ecx = edx * 100 -> ecx = (num / 100) * 100 
+    ; mov     eax, ecx        ; move ecx to eax
+    sub     eax, ecx        ; eax = eax - ecx -> num = num - (num / 100) * 100
+
+	; mov     eax, ecx
+	call    print_int
 
     call    print_nl        ; print new-line
 
